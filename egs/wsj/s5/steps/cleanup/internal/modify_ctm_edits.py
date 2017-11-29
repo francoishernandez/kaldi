@@ -211,6 +211,11 @@ def ProcessUtteranceForRepetitions(split_lines_of_utt):
         split_line = split_lines_of_utt[i]
         hyp_word = split_line[4]
         ref_word = split_line[6]
+        print(i)
+        print("HYP WORD")
+        print(hyp_word)
+        print("REF WORD")
+        print(ref_word)
         # keep_this_line will be True if we are going to keep this line in the
         # 'selected lines' for further processing of repetitions.  We only
         # eliminate lines involving non-scored words or epsilon in both hyp
@@ -222,6 +227,7 @@ def ProcessUtteranceForRepetitions(split_lines_of_utt):
         if (hyp_word == '<eps>' or hyp_word in non_scored_words) and \
            (ref_word == '<eps>' or ref_word in non_scored_words):
             keep_this_line = False
+            print("REMOVE LINE: " + hyp_word + " " + ref_word)
         if keep_this_line:
             selected_line_indexes.append(i)
             edit_type = split_line[7]
@@ -244,6 +250,9 @@ def ProcessUtteranceForRepetitions(split_lines_of_utt):
     for i in range(0, len(selected_line_indexes) - 3):
         this_indexes = selected_line_indexes[i:i+4]
         this_hyp_words = selected_hyp_words[i:i+4]
+
+        print(i)
+        print(selected_hyp_words[i])
 
         if this_hyp_words[0] == this_hyp_words[2] and \
            this_hyp_words[1] == this_hyp_words[3] and \
@@ -312,6 +321,7 @@ def ProcessUtterance(split_lines_of_utt):
             new_split_lines_of_utt.append(new_split_line)
     if args.allow_repetitions == 'true':
         new_split_lines_of_utt = ProcessUtteranceForRepetitions(new_split_lines_of_utt)
+        print(new_split_lines_of_utt)
     return new_split_lines_of_utt
 
 

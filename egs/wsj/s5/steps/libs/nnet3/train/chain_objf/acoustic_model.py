@@ -12,7 +12,7 @@ import logging
 import math
 import os
 import sys
-
+import time
 import libs.common as common_lib
 import libs.nnet3.train.common as common_train_lib
 
@@ -216,7 +216,7 @@ def train_new_models(dir, iter, srand, num_jobs,
             require_zero_status=True)
 
         threads.append(thread)
-
+	time.sleep(7)
 
     for thread in threads:
         thread.join()
